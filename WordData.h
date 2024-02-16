@@ -1,5 +1,5 @@
 /*******************************************************************/
-/*    Author:        Dr. Spiegel		                   */
+/*    Author:        Dr. Spiegel		                           */
 /*    Course:        CSC237                                        */
 /*    Filename:      WordData.h                                    */
 /*    Purpose:       This simple object is designed to hold a      */
@@ -11,6 +11,7 @@
 /*                   object also has the ability to increment the  */
 /*                   word's counter.                               */
 /*******************************************************************/
+//with additional functions added by Erand Bizati
 
 
 #ifndef WORDDATA_H
@@ -29,7 +30,7 @@ class WordData {
   /*                                                               */
   /*    Description:     Will construct a default word data object.*/
   /*                     Default values are an empty string zero as*/
-  /*                     the count.				   */
+  /*                     the count.				                   */
   /*                                                               */
   /*    Parameters:      string wrd - Word to be placed in object  */
   /*                     int cnt - Value to be placed in counter   */
@@ -124,6 +125,8 @@ class WordData {
   /*****************************************************************/
   WordData& operator++();	// preincrement
   WordData operator++(int);	// postincrement
+  void increment(); // incrementing the count of the word
+  bool matches(const std::string& word) const; // comparing the stored word with another word
 
  private: //PRIVATE VARIABLES
   
@@ -145,5 +148,7 @@ class WordData {
 /*    Return Value:    none                                      */
 /*****************************************************************/
 ostream &operator<< ( ostream &output, const WordData &word);
+std::string word; // Stores the word
+int count; // Stores the count of the word
 
 #endif
