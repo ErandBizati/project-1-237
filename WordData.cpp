@@ -1,8 +1,8 @@
 /********************************************************
- *    File:    WordData.cpp            			*
- *    Prepared by: Dr. Spiegel         			*
- *    Description:  // Add it          			*
- ********************************************************/
+/ *    File:    WordData.cpp            			*
+/ *    Prepared by: Dr. Spiegel         			*
+/ *    Description:  // Add it          			*
+ /********************************************************/
 
 #include <iostream>
 #include <iomanip>
@@ -55,10 +55,27 @@ WordData WordData::operator++(int)	// postincrement
 	return(temp);
 }
 
+// Overloaded stream insertion operator for WordData class
+ostream &operator<<(ostream &output, const WordData &word) {
+    output << setw(20) << left << word.getWord()
+           << setw(5) << left << word.getCount() << endl;
+    return output;
+}
+
+void WordData::increment() {
+    ++count; // Increment the word's count by one
+}
+
+bool WordData::matches(const std::string& otherWord) const {
+    return word == otherWord; // Return true if the words match
+}
+
+
+/*
 * << operator
   Parameters: output (ostream), word (worddata object)
   Goal: Overloaded output operator for class worddata
-------------------------------*/
+------------------------------//
                     //import/export  			//import
 ostream &operator<< (ostream &output, const WordData &word)
 {
@@ -66,3 +83,4 @@ ostream &operator<< (ostream &output, const WordData &word)
 	setw(5) << left << word.getCount() << endl;
 	return output;
 }
+*/
