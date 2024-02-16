@@ -4,14 +4,40 @@
 #include <vector>
 #include "WordData.h"
 #include <algorithm>
+#include <list> 
 
+void processFileWithList(const std::string& filename) {
+    std::ifstream inFile(filename);
+    if (!inFile) {
+        std::cerr << "Unable to open file: " << filename << std::endl;
+        return; // Return early if file cannot be opened
+    }
+
+    std::list<WordData> wordDataList;
+    std::string word;
+    while (inFile >> word) {
+        auto it = std::find_if(wordDataList.begin(), wordDataList.end(), [&word](const WordData& wd) {
+            return wd.matches(word);
+        });
+        if (it != wordDataList.end()) {
+            it->increment();
+        } else {
+            wordDataList.emplace_back(word, 1);
+        }
+    }
+
+    // Assuming WordData has an overloaded << operator
+    for (const auto& wd : wordDataList) {
+        std::cout << wd << std::endl;
+    }
+}
 
 void processFileWithParallelArrays(const std::string& filename); //should probably put this in a separate header
 
 
 void displayMenu() {
     std::cout << "Select an option:\n";
-    std::cout << "1. Count words using WordData array (current implementation)\n";
+    std::cout << "1. Count words using WordData array\n";
     std::cout << "2. Count words using parallel arrays\n";
     std::cout << "3. Count words using a std::list\n";
     std::cout << "4. Exit\n";
@@ -74,9 +100,12 @@ int main(int argc, char* argv[]) {
         std::cin >> filename;
         processFileWithParallelArrays(filename);
         break;
-    case 3:
-        std::cout << "Option under development.\n";
-        break;
+    case 3: // Count words using a std::list
+    std::cout << "Enter the filename: ";
+    std::cin >> filename;
+    processFileWithList(filename);
+    break;
+
     case 4:
         std::cout << "Exiting.\n";
         break;
