@@ -127,6 +127,7 @@ class WordData {
   WordData operator++(int);	// postincrement
   void increment(); // incrementing the count of the word
   bool matches(const std::string& word) const; // comparing the stored word with another word
+  friend std::ostream& operator<<(std::ostream& os, const WordData& wd);
 
  private: //PRIVATE VARIABLES
   
@@ -148,7 +149,5 @@ class WordData {
 /*    Return Value:    none                                      */
 /*****************************************************************/
 ostream &operator<< ( ostream &output, const WordData &word);
-std::string word; // Stores the word
-int count; // Stores the count of the word
 
 #endif
