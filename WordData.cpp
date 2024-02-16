@@ -56,10 +56,9 @@ WordData WordData::operator++(int)	// postincrement
 }
 
 // Overloaded stream insertion operator for WordData class
-ostream &operator<<(ostream &output, const WordData &word) {
-    output << setw(20) << left << word.getWord()
-           << setw(5) << left << word.getCount() << endl;
-    return output;
+std::ostream& operator<<(std::ostream& os, const WordData& wd) {
+    os << std::setw(20) << std::left << wd.word << std::setw(5) << std::left << wd.count;
+    return os;
 }
 
 void WordData::increment() {
@@ -70,17 +69,3 @@ bool WordData::matches(const std::string& otherWord) const {
     return word == otherWord; // Return true if the words match
 }
 
-
-/*
-* << operator
-  Parameters: output (ostream), word (worddata object)
-  Goal: Overloaded output operator for class worddata
-------------------------------//
-                    //import/export  			//import
-ostream &operator<< (ostream &output, const WordData &word)
-{
-	output << setw(20) << left << word.getWord() <<
-	setw(5) << left << word.getCount() << endl;
-	return output;
-}
-*/
